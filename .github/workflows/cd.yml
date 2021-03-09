@@ -47,7 +47,7 @@ jobs:
       - uses: actions/checkout@v2
 
       # Build for Android Automotive
-      - name: Build for Android
+      - name: Build for Android Automotive
         run: |
           pushd uamp
           ./gradlew wrapper
