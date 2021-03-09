@@ -1,4 +1,4 @@
-# android_auto_test_ci_cd
+# Android Auto (for testing CI/CD)
 
 [![CD](https://github.com/cfogelklou/android_auto_test_ci_cd/actions/workflows/cd.yml/badge.svg)](https://github.com/cfogelklou/android_auto_test_ci_cd/actions/workflows/cd.yml)
 
