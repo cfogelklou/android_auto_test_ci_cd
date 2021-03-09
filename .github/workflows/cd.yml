@@ -51,7 +51,7 @@ jobs:
 
       # Build for Android Automotive
       - name: Build for Android Automotive
-        - uses: eskatos/gradle-command-action@v1
+      - uses: eskatos/gradle-command-action@v1
           with:
             - arguments: assemble
             - build-root-directory: uamp
