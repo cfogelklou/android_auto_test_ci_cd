@@ -37,14 +37,16 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Install Gradle Wrapper (this step should not be needed)
-        run: |
-          pushd uamp
-          gradle wrapper
-          popd
-
       - name: Build for android
         run: |
           pushd uamp
-          ./gradlew build
+          gradle wrapper
+          ./gradlew assemble
+          popd
+
+      - name: Unit tests (debug)
+        run: |
+          pushd uamp
+          gradle wrapper
+          ./gradlew testDebugUnitTest
           popd
