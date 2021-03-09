@@ -6,9 +6,10 @@ on:
     branches:
       - master # Push events on master + devel branch
       - devel
+      - firstcommit
 
     tags:
-      - '*' # Test all pushed tags
+      - "*" # Test all pushed tags
 
   pull_request:
     types:
@@ -31,33 +32,13 @@ env:
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: [ubuntu-latest]
     name: Build and run unit tests.
     steps:
+      - uses: actions/checkout@v1
 
-    - uses: actions/checkout@v1
-    
-    - name: yarn install
-      run: |
-        pushd mobile_apps
-        yarn install
-        popd
-
-    - name: Run javascript unit tests.
-      run: |
-        pushd mobile_apps
-        yarn run test
-        popd
-
-    - name: Build for android
-      run: |
-        pushd mobile_apps
-        yarn run android:buildDebug
-        popd
-
-    - name: Build for iOS
-      run: |
-        pushd mobile_apps/ios
-        pod install
-        xcodebuild -workspace TripLog.xcworkspace -scheme TripLog -configuration Debug CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED="NO" CODE_SIGN_ENTITLEMENTS="" CODE_SIGNING_ALLOWED="NO" | xcpretty
-        popd
+      - name: Build for android
+        run: |
+          pushd uamp
+          ./gradlew assembleDebug
+          popd
