@@ -50,7 +50,7 @@ jobs:
       - name: Build for Android
         run: |
           pushd uamp
-          gradle wrapper
+          ./gradlew wrapper
           ./gradlew assemble
           popd
 
@@ -58,7 +58,6 @@ jobs:
       - name: Unit tests (debug)
         run: |
           pushd uamp
-          gradle wrapper
           ./gradlew testDebugUnitTest
           popd
 
@@ -66,6 +65,5 @@ jobs:
         if: (github.ref == 'refs/heads/master') || (github.ref == 'refs/heads/devel')
         run: |
           pushd uamp
-          gradle wrapper
           ./gradlew testReleaseUnitTest
           popd
