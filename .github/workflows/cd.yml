@@ -52,7 +52,6 @@ jobs:
           popd
 
       - name: Unit tests (release)
-        if: (github.ref == 'refs/heads/master') || (github.ref == 'refs/heads/devel')
         run: |
           pushd uamp
           ./gradlew testReleaseUnitTest
