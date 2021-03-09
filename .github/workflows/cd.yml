@@ -39,8 +39,8 @@ jobs:
       - name: Build for Android Automotive
         uses: eskatos/gradle-command-action@v1
         with:
-          - arguments: assemble
-          - build-root-directory: uamp
+          arguments: assemble
+          build-root-directory: uamp
       - name: Unit tests (debug)
         if: (github.ref == 'refs/heads/master') || (github.ref == 'refs/heads/devel')
         run: |
