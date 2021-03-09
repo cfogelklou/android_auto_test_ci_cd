@@ -45,17 +45,20 @@ jobs:
     steps:
       # Check out the files from git.
       - uses: actions/checkout@v2
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 11      
 
       # Build for Android Automotive
       - name: Build for Android Automotive
-        run: |
-          pushd uamp
-          ./gradlew wrapper
-          ./gradlew assemble
-          popd
+        uses: eskatos/gradle-command-action@v1        
+          with:
+            - arguments: assemble
+            - build-root-directory: uamp
 
       # Run unit tessts (debug)
       - name: Unit tests (debug)
+        if: (github.ref == 'refs/heads/master') || (github.ref == 'refs/heads/devel')
         run: |
           pushd uamp
           ./gradlew testDebugUnitTest
