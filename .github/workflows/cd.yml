@@ -1,16 +1,20 @@
 name: CD
 
 on:
+  ## Run this on pushes to (see branches, tags)
   push:
-    # Sequence of patterns matched against refs/heads
+    ## Run on pushes to these branches
     branches:
-      - master # Push events on master + devel branch
+      - master
+      - main
       - devel
-      - firstcommit
+      - develop
 
+    ## Run on pushes to these tags
     tags:
       - "*" # Test all pushed tags
 
+  ## Also run on pull requests with these statii
   pull_request:
     types:
       - labeled
@@ -22,31 +26,46 @@ on:
       - reopened
       - unlocked
 
+  ## Also also run on pull request reviews
   pull_request_review:
     types:
       - submitted
 
   status: {}
+
+## Environment variables for all jobs
 env:
   RELEASE: release
 
 jobs:
   build:
+    ## Array of platforms to run on. In this case, just run on ubuntu-latest (could also specify macos-latest, windows-latest, self-hosted, etc.)
     runs-on: [ubuntu-latest]
-    name: Build and run unit tests.
+    name: Build, and run unit tests.
     steps:
+      # Check out the files from git.
       - uses: actions/checkout@v2
 
-      - name: Build for android
+      # Build for Android Automotive
+      - name: Build for Android
         run: |
           pushd uamp
           gradle wrapper
           ./gradlew assemble
           popd
 
+      # Run unit tessts (debug)
       - name: Unit tests (debug)
         run: |
           pushd uamp
           gradle wrapper
           ./gradlew testDebugUnitTest
+          popd
+
+      - name: Unit tests (release)
+        if: (github.ref == 'refs/heads/master') || (github.ref == 'refs/heads/devel')
+        run: |
+          pushd uamp
+          gradle wrapper
+          ./gradlew testReleaseUnitTest
           popd
