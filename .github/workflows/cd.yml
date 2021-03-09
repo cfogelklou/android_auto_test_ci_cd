@@ -40,5 +40,6 @@ jobs:
       - name: Build for android
         run: |
           pushd uamp
+          gradle wrapper
           ./gradlew assembleDebug
           popd
