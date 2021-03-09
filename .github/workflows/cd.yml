@@ -35,11 +35,16 @@ jobs:
     runs-on: [ubuntu-latest]
     name: Build and run unit tests.
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+
+      - name: Install Gradle Wrapper (this step should not be needed)
+        run: |
+          pushd uamp
+          gradle wrapper
+          popd
 
       - name: Build for android
         run: |
           pushd uamp
-          gradle wrapper
-          ./gradlew assembleDebug
+          ./gradlew build
           popd
