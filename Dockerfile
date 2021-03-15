@@ -5,6 +5,7 @@ WORKDIR /docker_workdir
 
 # Use the local helo script
 COPY ./hello.sh ./
+COPY . .
 
 # Run it.
 ENTRYPOINT ["./hello.sh"]
