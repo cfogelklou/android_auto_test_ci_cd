@@ -6,6 +6,7 @@ on:
       - main
       - devel
       - develop
+      - feat/chfo/210316_docker
     tags:
       - "*"
   pull_request:
@@ -36,6 +37,10 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+
+      - name: Create and run Docker
+        id: docker
+        uses: ./
 
       - name: Build for Android Automotive
         run: |
