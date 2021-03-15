@@ -5,7 +5,7 @@ WORKDIR /docker_workdir
 
 # Use the local helo script
 COPY ./entrypoint.sh ./
-COPY ./uamp .
+COPY ./uamp ./uamp
 
 # Run it.
 ENTRYPOINT ["./entrypoint.sh"]

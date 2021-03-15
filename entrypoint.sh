@@ -6,8 +6,11 @@ echo "Hello, about to build UAMP"
 
 ls -al ./
 
+cd uamp
+
 echo "Assembling"
 
+chmod +x gradlew
 ./gradlew assemble
 
 echo "Debug tests"
@@ -15,5 +18,7 @@ echo "Debug tests"
 
 echo "Release tests"
 ./gradlew testReleaseUnitTest
+
+cd ..
 
 echo "Done."
